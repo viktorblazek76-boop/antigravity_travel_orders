@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model TravelOrder {
+  id               String         @id @default(cuid())
+  status           String         @default("Draft")
+  destination      String
+  purpose          String?
+  startDate        DateTime
+  endDate          DateTime
+  vehicleId        String?
+  initialKm        Float?         @default(0)
+  finalKm          Float?         @default(0)
+  fuelPrice        Float?         @default(0)
+  advanceDeduction Float?         @default(0)
+  exchangeRate     Float?         @default(1.0)
+  approverName     String?
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  advances         Advance[]
+  expenses         Expense[]
+  days             ItineraryDay[]
+}
+
+model ItineraryDay {
+  id         String      @id @default(cuid())
+  orderId    String
+  date       DateTime
+  startTime  String
+  endTime    String
+  startPlace String
+  endPlace   String
+  country    String      @default("CZ")
+  breakfast  Boolean     @default(false)
+  lunch      Boolean     @default(false)
+  dinner     Boolean     @default(false)
+  order      TravelOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+}
+
+model Advance {
+  id       String      @id @default(cuid())
+  orderId  String
+  amount   Float
+  currency String      @default("CZK")
+  order    TravelOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+}
+
+model Expense {
+  id          String      @id @default(cuid())
+  orderId     String
+  date        DateTime
+  type        String
+  description String?
+  amount      Float
+  currency    String      @default("CZK")
+  order       TravelOrder @relation(fields: [orderId], references: [id], onDelete: Cascade)
+}
+
+model RateSetting {
+  id       String  @id @default(cuid())
+  type     String
+  code     String
+  country  String?
+  baseRate Float
+  currency String  @default("CZK")
+}
