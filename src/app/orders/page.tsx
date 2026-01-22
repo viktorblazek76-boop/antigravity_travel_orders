@@ -4,6 +4,8 @@ import { getOrders } from '@/app/actions/orders';
 import { format } from 'date-fns';
 import ApproveButton from '@/components/ApproveButton';
 
+export const dynamic = 'force-dynamic';
+
 export default async function OrdersPage({ searchParams }: { searchParams: Promise<{ status?: string }> }) {
     const { status: filterStatus } = await searchParams;
     let orders = await getOrders();

@@ -5,6 +5,8 @@ import { format } from 'date-fns';
 import { cs } from 'date-fns/locale';
 import ApproveButton from '@/components/ApproveButton';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   const orders = await getOrders();
 
@@ -112,9 +114,9 @@ export default async function Home() {
                   </td>
                   <td className="px-6 py-4">
                     <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter ${order.status === 'Settled' ? 'bg-green-100 text-green-700' :
-                        order.status === 'Approved' ? 'bg-blue-100 text-blue-700' :
-                          order.status === 'Submitted' ? 'bg-orange-100 text-orange-700' :
-                            'bg-slate-100 text-slate-700'
+                      order.status === 'Approved' ? 'bg-blue-100 text-blue-700' :
+                        order.status === 'Submitted' ? 'bg-orange-100 text-orange-700' :
+                          'bg-slate-100 text-slate-700'
                       }`}>
                       {order.status === 'Approved' ? 'Schváleno' :
                         order.status === 'Settled' ? 'Vyúčtováno' :
