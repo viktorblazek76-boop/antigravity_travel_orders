@@ -8,8 +8,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "prisma:deploy": "prisma migrate deploy",
+    "start": "node server.js",
+    "prisma:deploy": "npx prisma migrate deploy",
     "lint": "eslint"
   },
   "dependencies": {

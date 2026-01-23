@@ -35,9 +35,10 @@ jobs:
       - name: Build application
         run: npm run build
 
-      - name: Copy static files to standalone
+      - name: Copy static files and package.json to standalone
         run: |
           cp -r public .next/standalone/
+          cp package.json .next/standalone/
           mkdir -p .next/standalone/.next/static
           cp -r .next/static .next/standalone/.next/
 
