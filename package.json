@@ -9,7 +9,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "node server.js",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
     "prisma:deploy": "npx prisma migrate deploy",
     "lint": "eslint"
   },
