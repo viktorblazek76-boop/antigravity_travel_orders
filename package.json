@@ -10,6 +10,7 @@
     "build": "next build",
     "start": "node server.js",
     "prisma:deploy": "npx prisma migrate deploy",
+    "prisma:seed": "npx tsx prisma/seed.ts",
     "lint": "eslint"
   },
   "dependencies": {
@@ -37,5 +38,8 @@
     "prisma": "^6.2.1",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "prisma": {
+    "seed": "npx tsx prisma/seed.ts"
   }
 }
