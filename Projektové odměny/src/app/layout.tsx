@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Projektové odměny | Konica Minolta",
+  title: "D365 REDESIGN TEST",
   description: "Systém pro správu projektových odměn a bonusů",
 };
 
