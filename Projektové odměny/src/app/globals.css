@@ -48,7 +48,7 @@
 
 :root {
   --radius: 4px; /* D365 standard has smaller radius */
-  --background: oklch(1 0 0);
+  --background: #ffff00;
   --foreground: oklch(0.21 0.006 285.88); /* Microsoft Neutral Primary #323130 */
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.21 0.006 285.88);
