@@ -88,53 +88,53 @@ export function ProjectGrid({ projects, currentRole, currentUserId, availableUse
                 <div className="flex justify-end">
                     <button
                         onClick={() => setIsCreateProjectOpen(true)}
-                        className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold shadow-xl shadow-blue-600/20 transition-all"
+                        className="flex items-center gap-2 px-4 py-1.5 bg-primary hover:bg-primary/90 text-white rounded-sm text-sm font-semibold shadow-sm transition-all"
                     >
-                        <Plus size={18} />
+                        <Plus size={16} />
                         Nový Projekt
                     </button>
                 </div>
             )}
 
             {projects.map((project) => (
-                <div key={project.id} className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden backdrop-blur-md">
-                    <div className="p-6 border-b border-white/10 flex justify-between items-center bg-white/2">
+                <div key={project.id} className="bg-white border border-border rounded-sm shadow-sm overflow-hidden">
+                    <div className="p-4 border-b border-border flex justify-between items-center bg-accent/30">
                         <div>
-                            <h2 className="text-xl font-bold text-blue-400">{project.name}</h2>
-                            <p className="text-sm text-white/40">{project.customer}</p>
+                            <h2 className="text-sm font-bold text-primary">{project.name}</h2>
+                            <p className="text-[11px] text-muted-foreground">{project.customer}</p>
                         </div>
-                        <div className="flex gap-4 items-center">
+                        <div className="flex gap-2 items-center">
                             {(currentRole === 'ID' || (currentRole === 'PM' && project.rewards.some(r => r.userId === currentUserId))) && (
                                 <button
                                     onClick={() => setActiveProjectForPhase(project.id)}
-                                    className="flex items-center gap-2 px-3 py-1.5 bg-amber-500/10 border border-amber-500/20 rounded-lg text-[10px] font-bold text-amber-500 hover:bg-amber-500/20 transition-all"
+                                    className="flex items-center gap-1.5 px-3 py-1 bg-white border border-border rounded-sm text-[11px] font-semibold text-foreground hover:bg-accent transition-all"
                                 >
-                                    <Plus size={12} />
+                                    <Plus size={12} className="text-primary" />
                                     Přidat Fázi
                                 </button>
                             )}
                             <button
                                 onClick={() => exportProjectToExcel(project)}
-                                className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-xs font-bold hover:bg-white/10 transition-all text-white/60 hover:text-white"
+                                className="flex items-center gap-1.5 px-3 py-1 bg-white border border-border rounded-sm text-[11px] font-semibold text-foreground hover:bg-accent transition-all"
                             >
-                                <FileDown size={14} />
-                                Export do Excelu
+                                <FileDown size={14} className="text-primary" />
+                                Export
                             </button>
-                            <span className="text-xs font-medium uppercase tracking-widest text-white/20">Fáze Projektu</span>
+                            <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground/50 ml-2">Fáze Projektu</span>
                         </div>
                     </div>
 
                     <div className="overflow-x-auto">
                         <table className="w-full text-left border-collapse">
                             <thead>
-                                <tr className="text-white/40 text-xs font-medium uppercase border-b border-white/5">
-                                    <th className="px-6 py-4 sticky left-0 bg-[#16181d] z-10 w-64 border-r border-white/5">
+                                <tr className="text-muted-foreground text-[10px] font-bold uppercase border-b border-border bg-accent/20">
+                                    <th className="px-5 py-3 sticky left-0 bg-white z-10 w-64 border-r border-border">
                                         <div className="flex items-center justify-between">
                                             <span>Pracovník / Role</span>
                                             {(currentRole === 'ID' || currentRole === 'PM') && (
                                                 <button
                                                     onClick={() => setActiveProjectForMember(project.id)}
-                                                    className="p-1 hover:bg-white/5 rounded text-blue-400 transition-colors"
+                                                    className="p-1 hover:bg-accent rounded-sm text-primary transition-colors"
                                                     title="Přidat pracovníka"
                                                 >
                                                     <Plus size={14} />
@@ -143,52 +143,52 @@ export function ProjectGrid({ projects, currentRole, currentUserId, availableUse
                                         </div>
                                     </th>
                                     {project.phases.map((phase) => (
-                                        <th key={phase.id} className="px-6 py-4 min-w-[200px] border-r border-white/5 text-center group">
+                                        <th key={phase.id} className="px-5 py-3 min-w-[180px] border-r border-border text-center group">
                                             <div className="flex flex-col items-center gap-1 relative">
                                                 <div className="flex items-center gap-2">
                                                     <div className="flex flex-col">
-                                                        <span>{phase.name}</span>
+                                                        <span className="text-foreground">{phase.name}</span>
                                                         {phase.dueDate && (
-                                                            <span className="text-[9px] text-white/20 font-normal">
-                                                                Termín: {new Date(phase.dueDate).toLocaleDateString('cs-CZ')}
+                                                            <span className="text-[9px] text-muted-foreground font-normal">
+                                                                {new Date(phase.dueDate).toLocaleDateString('cs-CZ')}
                                                             </span>
                                                         )}
                                                     </div>
                                                     {/* Bulk Action Buttons */}
-                                                    <div className="flex items-center gap-1">
+                                                    <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                                                         {currentRole === 'PM' && (phase.status === 'OPEN' || !phase.status) && (
-                                                            <button onClick={() => handlePhaseAction(phase.id, 'OPEN')} className="px-2 py-0.5 bg-amber-500/20 hover:bg-amber-500/30 rounded text-amber-500 text-[9px] font-bold border border-amber-500/30 flex items-center gap-1" title="Navrhnout celý milník k vyplacení">
-                                                                <Send size={10} /> NAVRHNOUT
+                                                            <button onClick={() => handlePhaseAction(phase.id, 'OPEN')} className="px-1.5 py-0.5 bg-amber-50 text-amber-600 rounded-sm text-[8px] font-bold border border-amber-200" title="Navrhnout k vyplacení">
+                                                                <Send size={10} />
                                                             </button>
                                                         )}
                                                         {currentRole === 'ID' && phase.status === 'PROPOSED' && (
-                                                            <button onClick={() => handlePhaseAction(phase.id, 'PROPOSED')} className="px-2 py-0.5 bg-emerald-500/20 hover:bg-emerald-500/30 rounded text-emerald-500 text-[9px] font-bold border border-emerald-500/30 flex items-center gap-1" title="Schválit celý milník k vyplacení">
-                                                                <Check size={10} /> SCHVÁLIT
+                                                            <button onClick={() => handlePhaseAction(phase.id, 'PROPOSED')} className="px-1.5 py-0.5 bg-emerald-50 text-emerald-600 rounded-sm text-[8px] font-bold border border-emerald-200" title="Schválit">
+                                                                <Check size={10} />
                                                             </button>
                                                         )}
                                                         {(currentRole === 'ID' || currentRole === 'PRD') && phase.status === 'APPROVED' && (
-                                                            <button onClick={() => handlePhaseAction(phase.id, 'APPROVED')} className="px-2 py-0.5 bg-blue-500/20 hover:bg-blue-500/30 rounded text-blue-500 text-[9px] font-bold border border-blue-500/30 flex items-center gap-1" title="Odeslat milník do mezd">
-                                                                <DollarSign size={10} /> K VÝPLATĚ
+                                                            <button onClick={() => handlePhaseAction(phase.id, 'APPROVED')} className="px-1.5 py-0.5 bg-primary/5 text-primary rounded-sm text-[8px] font-bold border border-primary/20" title="K výplatě">
+                                                                <DollarSign size={10} />
                                                             </button>
                                                         )}
                                                     </div>
                                                 </div>
                                                 {phase.isPaid ? (
-                                                    <span className="flex items-center gap-1 text-[10px] text-emerald-400">
+                                                    <span className="flex items-center gap-0.5 text-[9px] text-emerald-600 font-semibold italic">
                                                         <CheckCircle2 size={10} /> Vyplaceno
                                                     </span>
                                                 ) : (
-                                                    <div className="flex items-center gap-1">
+                                                    <div className="flex items-center">
                                                         <RewardStatusBadge status={phase.status || 'OPEN'} />
                                                     </div>
                                                 )}
                                             </div>
                                         </th>
                                     ))}
-                                    <th className="px-6 py-4 text-right bg-blue-600/5">Celkem</th>
+                                    <th className="px-5 py-3 text-right bg-primary/5">Celkem</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-white/5">
+                            <tbody className="divide-y divide-border">
                                 {Array.from(new Set(project.rewards.filter(r => !r.isTeamReward).map(r => r.userId))).map(userId => {
                                     const userRewards = project.rewards.filter(r => r.userId === userId && !r.isTeamReward)
                                     const userName = userRewards[0]?.user?.name || 'Neznámý'
@@ -196,15 +196,15 @@ export function ProjectGrid({ projects, currentRole, currentUserId, availableUse
                                     const total = userRewards.reduce((sum, r) => sum + r.amount, 0)
 
                                     return (
-                                        <tr key={userId} className="hover:bg-white/2 transition-colors">
-                                            <td className="px-6 py-4 sticky left-0 bg-[#16181d] z-10 border-r border-white/5">
+                                        <tr key={userId} className="hover:bg-accent/40 transition-colors">
+                                            <td className="px-5 py-3 sticky left-0 bg-white z-10 border-r border-border">
                                                 <div className="flex items-center gap-3">
-                                                    <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white/40">
+                                                    <div className="w-7 h-7 rounded-sm bg-accent flex items-center justify-center text-muted-foreground">
                                                         <UserIcon size={14} />
                                                     </div>
                                                     <div>
-                                                        <div className="font-medium text-sm">{userName}</div>
-                                                        <div className="text-[10px] text-white/30 truncate max-w-[150px]">{projectRole}</div>
+                                                        <div className="font-semibold text-xs text-foreground">{userName}</div>
+                                                        <div className="text-[9px] text-muted-foreground uppercase tracking-tight truncate max-w-[150px]">{projectRole}</div>
                                                     </div>
                                                 </div>
                                             </td>
@@ -213,7 +213,7 @@ export function ProjectGrid({ projects, currentRole, currentUserId, availableUse
                                                 return (
                                                     <td
                                                         key={phase.id}
-                                                        className={`px-6 py-4 border-r border-white/5 text-center cursor-pointer transition-all ${currentRole === 'PM' ? 'hover:bg-blue-600/10' : ''}`}
+                                                        className={`px-5 py-3 border-r border-border text-center cursor-pointer transition-all ${currentRole === 'PM' ? 'hover:bg-primary/5' : ''}`}
                                                         onClick={() => {
                                                             if (currentRole === 'PM' && (!reward || reward.status !== 'PAID') && userId) {
                                                                 setSelectedReward({
@@ -228,28 +228,24 @@ export function ProjectGrid({ projects, currentRole, currentUserId, availableUse
                                                         }}
                                                     >
                                                         {reward ? (
-                                                            <div className="group flex flex-col items-center gap-1 relative">
-                                                                <span className={`font-mono text-sm ${reward.status === 'PAID' ? 'text-white/40' : 'text-blue-400 font-bold'}`}>
+                                                            <div className="flex flex-col items-center gap-1">
+                                                                <span className={`text-xs font-semibold ${reward.status === 'PAID' ? 'text-muted-foreground/60' : 'text-primary'}`}>
                                                                     {reward.amount.toLocaleString('cs-CZ')} Kč
                                                                 </span>
-                                                                {/* Only show badge in Phase header now, but keep minimal status here if useful */}
-                                                                {/* <RewardStatusBadge status={reward.status} /> */}
-
-                                                                {/* Individual Action Buttons - Removed as per Phase workflow requirements */}
                                                             </div>
                                                         ) : (
                                                             currentRole === 'PM' ? (
-                                                                <div className="flex justify-center text-white/5 group-hover:text-blue-400/50">
-                                                                    <Plus size={16} />
+                                                                <div className="flex justify-center text-border hover:text-primary/40">
+                                                                    <Plus size={14} />
                                                                 </div>
                                                             ) : (
-                                                                <span className="text-white/5 italic text-xs">—</span>
+                                                                <span className="text-border italic text-[10px]">—</span>
                                                             )
                                                         )}
                                                     </td>
                                                 )
                                             })}
-                                            <td className="px-6 py-4 text-right font-mono font-bold text-blue-400 bg-blue-600/5">
+                                            <td className="px-5 py-3 text-right text-xs font-bold text-primary bg-primary/5">
                                                 {total.toLocaleString('cs-CZ')} Kč
                                             </td>
                                         </tr>
@@ -257,79 +253,62 @@ export function ProjectGrid({ projects, currentRole, currentUserId, availableUse
                                 })}
 
                                 {/* SUMMARY: INDIVIDUAL TOTALS */}
-                                <tr className="bg-white/5 border-t border-white/10">
-                                    <td className="px-6 py-3 sticky left-0 bg-[#0f1115] z-10 border-r border-white/5 font-bold text-xs uppercase text-white/40">
-                                        Individuální odměny celkem
+                                <tr className="bg-accent/10">
+                                    <td className="px-5 py-2 sticky left-0 bg-accent/20 z-10 border-r border-border font-bold text-[9px] uppercase text-muted-foreground">
+                                        Individuální odměny
                                     </td>
                                     {project.phases.map(phase => {
                                         const phaseTotal = project.rewards.filter(r => r.phaseId === phase.id && !r.isTeamReward).reduce((sum, r) => sum + r.amount, 0)
                                         return (
-                                            <td key={phase.id} className="px-6 py-3 border-r border-white/5 text-center font-mono text-xs text-white/40">
+                                            <td key={phase.id} className="px-5 py-2 border-r border-border text-center text-[10px] font-semibold text-muted-foreground/80">
                                                 {phaseTotal > 0 ? `${phaseTotal.toLocaleString('cs-CZ')} Kč` : '—'}
                                             </td>
                                         )
                                     })}
-                                    <td className="px-6 py-3 text-right font-mono font-bold text-white/60 bg-white/2">
+                                    <td className="px-5 py-2 text-right text-[10px] font-bold text-muted-foreground/80">
                                         {project.rewards.filter(r => !r.isTeamReward).reduce((sum, r) => sum + r.amount, 0).toLocaleString('cs-CZ')} Kč
                                     </td>
                                 </tr>
 
                                 {/* TEAM REWARD / DRAWDOWN ROW */}
-                                <tr className="bg-blue-600/10 border-t-2 border-blue-500/30">
-                                    <td className="px-6 py-5 sticky left-0 bg-[#0f1115] z-10 border-r border-white/5 shadow-[5px_0_10px_rgba(0,0,0,0.5)]">
+                                <tr className="bg-white border-t border-border">
+                                    <td className="px-5 py-3 sticky left-0 bg-white z-10 border-r border-border">
                                         <div className="flex items-center gap-3">
-                                            <div className="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400 border border-blue-500/30">
-                                                <Shield size={20} />
+                                            <div className="w-8 h-8 rounded-sm bg-primary/10 flex items-center justify-center text-primary border border-primary/20">
+                                                <Shield size={16} />
                                             </div>
                                             <div>
-                                                <div className="font-black text-xs uppercase tracking-tighter text-blue-400">Týmový Budget (Pool)</div>
-                                                <div className="flex items-center gap-2 mt-0.5">
-                                                    <div className="text-[10px] text-white/60 font-mono">
-                                                        Zůstatek: <span className="text-white font-bold">{(project.teamBudget - project.rewards.filter(r => r.isTeamReward).reduce((sum, r) => sum + r.amount, 0)).toLocaleString('cs-CZ')} Kč</span>
+                                                <div className="font-bold text-[10px] uppercase text-primary">Týmový Budget</div>
+                                                <div className="flex items-center gap-1.5 mt-0.5">
+                                                    <div className="text-[9px] text-muted-foreground">
+                                                        Zůstatek: <span className="text-foreground font-bold">{(project.teamBudget - project.rewards.filter(r => r.isTeamReward).reduce((sum, r) => sum + r.amount, 0)).toLocaleString('cs-CZ')} Kč</span>
                                                     </div>
-                                                    <div className="w-1 h-1 rounded-full bg-white/20"></div>
-                                                    <div className="text-[9px] text-white/30 uppercase flex items-center gap-1">
-                                                        z {project.teamBudget.toLocaleString('cs-CZ')} Kč
-                                                        {currentRole === 'PM' && (
-                                                            <button
-                                                                onClick={async () => {
-                                                                    const newBudget = prompt('Zadejte navrhovaný týmový budget:', (project.proposedBudget || project.teamBudget).toString())
-                                                                    if (newBudget !== null) {
-                                                                        const val = parseFloat(newBudget)
-                                                                        if (!isNaN(val)) await proposeProjectBudget(project.id, val)
-                                                                    }
-                                                                }}
-                                                                className="p-0.5 hover:bg-white/10 rounded text-amber-500"
-                                                                title="Navrhnout změnu budgetu"
-                                                            >
-                                                                <Edit size={8} />
-                                                            </button>
-                                                        )}
-                                                        {currentRole === 'ID' && (
-                                                            <button
-                                                                onClick={async () => {
-                                                                    const newBudget = prompt('Upravit týmový budget (přímá editace):', project.teamBudget.toString())
-                                                                    if (newBudget !== null) {
-                                                                        const val = parseFloat(newBudget)
-                                                                        if (!isNaN(val)) await updateProjectBudget(project.id, val)
-                                                                    }
-                                                                }}
-                                                                className="p-0.5 hover:bg-white/10 rounded text-blue-400"
-                                                                title="Upravit budget přímo"
-                                                            >
-                                                                <Edit size={8} />
-                                                            </button>
-                                                        )}
+                                                    <div className="text-[8px] text-muted-foreground/50 italic">
+                                                        ({project.teamBudget.toLocaleString('cs-CZ')} Kč)
                                                     </div>
+                                                    {currentRole === 'PM' && (
+                                                        <button
+                                                            onClick={async () => {
+                                                                const newBudget = prompt('Zadejte navrhovaný týmový budget:', (project.proposedBudget || project.teamBudget).toString())
+                                                                if (newBudget !== null) {
+                                                                    const val = parseFloat(newBudget)
+                                                                    if (!isNaN(val)) await proposeProjectBudget(project.id, val)
+                                                                }
+                                                            }}
+                                                            className="p-0.5 hover:bg-accent rounded-sm text-amber-600"
+                                                            title="Navrhnout změnu"
+                                                        >
+                                                            <Edit size={10} />
+                                                        </button>
+                                                    )}
                                                 </div>
                                                 {project.budgetStatus === 'PROPOSED' && (
-                                                    <div className="mt-1 px-2 py-0.5 bg-amber-500/10 border border-amber-500/20 rounded text-[9px] flex items-center justify-between">
-                                                        <span className="text-amber-500 font-bold">NAVRŽENO: {project.proposedBudget.toLocaleString('cs-CZ')} Kč</span>
+                                                    <div className="mt-1 px-1.5 py-0.5 bg-amber-50 border border-amber-200 rounded-sm text-[8px] flex items-center gap-2">
+                                                        <span className="text-amber-700 font-bold">NÁVRH: {project.proposedBudget.toLocaleString('cs-CZ')} Kč</span>
                                                         {currentRole === 'ID' && (
                                                             <button
                                                                 onClick={() => approveProjectBudget(project.id)}
-                                                                className="p-0.5 bg-amber-500 text-white rounded hover:bg-amber-400 transition-colors"
-                                                                title="Schválit budget"
+                                                                className="p-0.5 bg-amber-400 text-white rounded-sm hover:bg-amber-500 transition-colors"
                                                             >
                                                                 <Check size={8} />
                                                             </button>
@@ -344,75 +323,64 @@ export function ProjectGrid({ projects, currentRole, currentUserId, availableUse
                                         const phaseTotal = teamRewards.reduce((sum, r) => sum + r.amount, 0)
 
                                         return (
-                                            <td key={phase.id} className="px-6 py-4 border-r border-white/5 text-center relative group">
+                                            <td key={phase.id} className="px-5 py-3 border-r border-border text-center relative group">
                                                 {phaseTotal > 0 ? (
-                                                    <div className="flex flex-col items-center gap-1">
-                                                        <span className="font-mono text-sm font-bold text-white">
+                                                    <div className="flex flex-col items-center">
+                                                        <span className="text-xs font-semibold text-foreground">
                                                             {phaseTotal.toLocaleString('cs-CZ')} Kč
                                                         </span>
-                                                        <div className="flex gap-1 overflow-x-auto max-w-[150px] scrollbar-none">
+                                                        <div className="flex gap-0.5 mt-1">
                                                             {teamRewards.map(tr => (
-                                                                <div key={tr.id} title={tr.note || ''} className="w-2 h-2 rounded-full bg-blue-400/40 cursor-help" />
+                                                                <div key={tr.id} title={tr.note || ''} className="w-1.5 h-1.5 rounded-full bg-primary/40" />
                                                             ))}
                                                         </div>
                                                     </div>
                                                 ) : (
-                                                    <span className="text-white/5 italic text-xs">—</span>
+                                                    <span className="text-border italic text-[10px]">—</span>
                                                 )}
                                                 {currentRole === 'PM' && !phase.isPaid && (
-                                                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-[#1a1e26]/80 transition-opacity">
+                                                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-white/90 transition-opacity">
                                                         <button
                                                             onClick={async () => {
                                                                 const amountStr = prompt('Částka čerpání:')
                                                                 if (!amountStr) return
                                                                 const amount = parseFloat(amountStr)
                                                                 if (isNaN(amount)) return
-
-                                                                const note = prompt('Poznámka k čerpání:')
+                                                                const note = prompt('Poznámka:')
                                                                 if (!note) return
-
-                                                                try {
-                                                                    await addTeamDrawdown({
-                                                                        projectId: project.id,
-                                                                        phaseId: phase.id,
-                                                                        amount,
-                                                                        note
-                                                                    })
-                                                                } catch (err: any) {
-                                                                    alert(err.message)
-                                                                }
+                                                                try { await addTeamDrawdown({ projectId: project.id, phaseId: phase.id, amount, note }) } catch (err: any) { alert(err.message) }
                                                             }}
-                                                            className="p-1 bg-blue-500 text-white rounded-lg hover:bg-blue-400"
+                                                            className="p-1 bg-primary text-white rounded-sm hover:bg-primary/90"
                                                         >
-                                                            <Plus size={14} />
+                                                            <Plus size={12} />
                                                         </button>
                                                     </div>
                                                 )}
                                             </td>
                                         )
                                     })}
-                                    <td className="px-6 py-4 text-right font-mono font-bold text-white">
+                                    <td className="px-5 py-3 text-right text-xs font-bold text-foreground">
                                         {project.rewards.filter(r => r.isTeamReward).reduce((sum, r) => sum + r.amount, 0) > 0
                                             ? `${project.rewards.filter(r => r.isTeamReward).reduce((sum, r) => sum + r.amount, 0).toLocaleString('cs-CZ')} Kč`
                                             : '—'}
                                     </td>
                                 </tr>
 
-                                <tr className="bg-blue-600/20 border-t-2 border-blue-500/50">
-                                    <td className="px-6 py-4 sticky left-0 bg-[#0f1115] z-10 border-r border-white/5 font-black text-sm uppercase text-blue-400">
-                                        Celková hodnota projektu
+                                <tr className="bg-primary/5 border-t border-primary/20">
+                                    <td className="px-5 py-3 sticky left-0 bg-primary/10 z-10 border-r border-border font-bold text-xs uppercase text-primary">
+                                        Hodnota celkem
                                     </td>
                                     {project.phases.map(phase => {
                                         const indPhaseTotal = project.rewards.filter(r => r.phaseId === phase.id && !r.isTeamReward).reduce((sum, r) => sum + r.amount, 0)
                                         const teamPhaseTotal = project.rewards.filter(r => r.phaseId === phase.id && r.isTeamReward).reduce((sum, r) => sum + r.amount, 0)
                                         const total = indPhaseTotal + teamPhaseTotal
                                         return (
-                                            <td key={phase.id} className="px-6 py-4 border-r border-white/5 text-center font-mono text-sm font-bold text-blue-400">
+                                            <td key={phase.id} className="px-5 py-3 border-r border-border text-center text-xs font-bold text-primary">
                                                 {total > 0 ? `${total.toLocaleString('cs-CZ')} Kč` : '—'}
                                             </td>
                                         )
                                     })}
-                                    <td className="px-6 py-4 text-right font-mono font-black text-blue-400 bg-blue-600/30">
+                                    <td className="px-5 py-3 text-right text-sm font-black text-primary bg-primary/20">
                                         {(project.rewards.filter(r => !r.isTeamReward).reduce((sum, r) => sum + r.amount, 0) + project.teamBudget).toLocaleString('cs-CZ')} Kč
                                     </td>
                                 </tr>

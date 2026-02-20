@@ -9,41 +9,41 @@ export function UserTable({ users }: { users: any[] }) {
     }
 
     return (
-        <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
-            <table className="w-full text-left font-sans">
+        <div className="bg-white border border-border rounded-sm overflow-hidden shadow-sm">
+            <table className="w-full text-left font-sans border-collapse">
                 <thead>
-                    <tr className="border-b border-white/10 text-[10px] uppercase tracking-widest text-white/20 font-bold">
-                        <th className="px-6 py-4">Jméno</th>
-                        <th className="px-6 py-4">Role</th>
-                        <th className="px-6 py-4">E-mail</th>
-                        <th className="px-6 py-4">Nadřízený</th>
-                        <th className="px-6 py-4 text-right">Akce</th>
+                    <tr className="bg-accent/30 border-b border-border text-[10px] uppercase tracking-wider text-muted-foreground font-bold">
+                        <th className="px-6 py-3">Jméno</th>
+                        <th className="px-6 py-3">Role</th>
+                        <th className="px-6 py-3">E-mail</th>
+                        <th className="px-6 py-3">Nadřízený</th>
+                        <th className="px-6 py-3 text-right">Akce</th>
                     </tr>
                 </thead>
-                <tbody className="divide-y divide-white/5">
+                <tbody className="divide-y divide-border">
                     {users.map(user => (
-                        <tr key={user.id} className="hover:bg-white/2 group transition-colors">
-                            <td className="px-6 py-4 flex items-center gap-3">
-                                <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-white/40 group-hover:bg-blue-500/20 group-hover:text-blue-400 transition-all">
+                        <tr key={user.id} className="hover:bg-accent/40 group transition-colors">
+                            <td className="px-6 py-3.5 flex items-center gap-3">
+                                <div className="w-7 h-7 rounded-sm bg-accent flex items-center justify-center text-muted-foreground group-hover:bg-primary/10 group-hover:text-primary transition-all">
                                     <UserIcon size={14} />
                                 </div>
-                                <span className="font-medium">{user.name}</span>
+                                <span className="font-semibold text-xs text-foreground">{user.name}</span>
                             </td>
-                            <td className="px-6 py-4">
-                                <span className="px-2 py-0.5 bg-white/5 border border-white/10 rounded-full text-[10px] font-bold">
+                            <td className="px-6 py-3.5">
+                                <span className="px-2 py-0.5 bg-accent/50 border border-border rounded-sm text-[9px] font-bold text-muted-foreground">
                                     {user.role}
                                 </span>
                             </td>
-                            <td className="px-6 py-4 text-white/40 text-sm">
-                                <div className="flex items-center gap-2 font-mono"><Mail size={12} /> {user.email}</div>
+                            <td className="px-6 py-3.5 text-muted-foreground text-xs font-medium">
+                                <div className="flex items-center gap-2"><Mail size={12} className="text-primary/60" /> {user.email}</div>
                             </td>
-                            <td className="px-6 py-4 text-white/40 text-sm">
-                                {user.manager?.name || <span className="italic text-white/10">—</span>}
+                            <td className="px-6 py-3.5 text-muted-foreground text-xs font-medium">
+                                {user.manager?.name || <span className="italic text-muted-foreground/30">—</span>}
                             </td>
-                            <td className="px-6 py-4 text-right">
+                            <td className="px-6 py-3.5 text-right">
                                 <button
                                     onClick={() => handleEdit(user)}
-                                    className="p-2 hover:bg-blue-500/20 rounded-lg text-blue-400/40 hover:text-blue-400 transition-all"
+                                    className="p-1.5 hover:bg-accent rounded-sm text-muted-foreground hover:text-primary transition-all"
                                     title="Upravit zaměstnance"
                                 >
                                     <Edit size={16} />

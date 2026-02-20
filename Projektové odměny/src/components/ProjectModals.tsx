@@ -73,76 +73,76 @@ export function CreateProjectModal({
     }
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-            <div className="bg-[#1a1c23] border border-white/10 rounded-2xl w-full max-w-lg shadow-2xl shadow-black/50 overflow-hidden max-h-[90vh] flex flex-col">
-                <div className="flex justify-between items-center p-6 border-b border-white/5 shrink-0">
-                    <div className="flex items-center gap-3">
-                        <div className="p-2 bg-blue-600 rounded-lg text-white"><Briefcase size={20} /></div>
-                        <h3 className="text-xl font-bold text-white">Nový Projekt</h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 animate-in fade-in duration-200">
+            <div className="bg-white border border-border rounded-sm w-full max-w-lg shadow-2xl overflow-hidden max-h-[90vh] flex flex-col">
+                <div className="flex justify-between items-center p-4 border-b border-border bg-accent/30 shrink-0">
+                    <div className="flex items-center gap-2">
+                        <div className="p-1.5 bg-primary rounded-sm text-white"><Briefcase size={16} /></div>
+                        <h3 className="text-sm font-bold text-foreground">Nový Projekt</h3>
                     </div>
-                    <button onClick={onClose} className="p-2 text-white/40 hover:text-white transition-colors">
-                        <X size={20} />
+                    <button onClick={onClose} className="p-1 text-muted-foreground hover:text-foreground transition-colors">
+                        <X size={18} />
                     </button>
                 </div>
 
-                <form onSubmit={handleSubmit} className="p-6 space-y-6 overflow-y-auto custom-scrollbar">
+                <form onSubmit={handleSubmit} className="p-5 space-y-5 overflow-y-auto custom-scrollbar">
                     <div className="space-y-4">
-                        <div className="space-y-2">
-                            <label className="text-[10px] uppercase tracking-widest text-white/20 font-bold ml-1">Název Projektu</label>
-                            <input required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-sm outline-none focus:ring-2 focus:ring-blue-500/50" placeholder="Např. Implementace D365" />
+                        <div className="space-y-1">
+                            <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold ml-0.5">Název Projektu</label>
+                            <input required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} className="w-full bg-white border border-border rounded-sm py-2 px-3 text-xs outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary transition-all" placeholder="Např. Implementace D365" />
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
-                            <div className="space-y-2">
-                                <label className="text-[10px] uppercase tracking-widest text-white/20 font-bold ml-1">Zákazník</label>
-                                <input required value={formData.customer} onChange={e => setFormData({ ...formData, customer: e.target.value })} className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-sm outline-none focus:ring-2 focus:ring-blue-500/50" placeholder="Zákazník" />
+                            <div className="space-y-1">
+                                <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold ml-0.5">Zákazník</label>
+                                <input required value={formData.customer} onChange={e => setFormData({ ...formData, customer: e.target.value })} className="w-full bg-white border border-border rounded-sm py-2 px-3 text-xs outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary transition-all" placeholder="Zákazník" />
                             </div>
-                            <div className="space-y-2">
-                                <label className="text-[10px] uppercase tracking-widest text-white/20 font-bold ml-1">Týmový Budget (Pool)</label>
+                            <div className="space-y-1">
+                                <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold ml-0.5">Týmový Budget (Pool)</label>
                                 <input
                                     type="number"
                                     value={formData.teamBudget}
                                     onChange={(e) => setFormData({ ...formData, teamBudget: e.target.value })}
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-sm outline-none focus:ring-2 focus:ring-blue-500/50 font-mono"
+                                    className="w-full bg-white border border-border rounded-sm py-2 px-3 text-xs outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary transition-all font-mono"
                                     placeholder="0"
                                 />
                             </div>
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
-                            <div className="space-y-2">
-                                <label className="text-[10px] uppercase tracking-widest text-white/20 font-bold ml-1">Projektový Manažer (PM)</label>
-                                <select required value={formData.pmId} onChange={e => setFormData({ ...formData, pmId: e.target.value })} className="w-full bg-[#1a1c23] border border-white/10 rounded-xl py-3 px-4 text-sm outline-none focus:ring-2 focus:ring-blue-500/50">
+                            <div className="space-y-1">
+                                <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold ml-0.5">Projektový Manažer (PM)</label>
+                                <select required value={formData.pmId} onChange={e => setFormData({ ...formData, pmId: e.target.value })} className="w-full bg-white border border-border rounded-sm py-2 px-3 text-xs outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary">
                                     <option value="">Vyberte...</option>
                                     {availableUsers.filter(u => u.role === 'PM' || u.role === 'ID').map(u => <option key={u.id} value={u.id}>{u.name}</option>)}
                                 </select>
                             </div>
-                            <div className="space-y-2">
-                                <label className="text-[10px] uppercase tracking-widest text-white/20 font-bold ml-1">Produktový Ředitel (PRD)</label>
-                                <select required value={formData.prdId} onChange={e => setFormData({ ...formData, prdId: e.target.value })} className="w-full bg-[#1a1c23] border border-white/10 rounded-xl py-3 px-4 text-sm outline-none focus:ring-2 focus:ring-blue-500/50">
+                            <div className="space-y-1">
+                                <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold ml-0.5">Produktový Ředitel (PRD)</label>
+                                <select required value={formData.prdId} onChange={e => setFormData({ ...formData, prdId: e.target.value })} className="w-full bg-white border border-border rounded-sm py-2 px-3 text-xs outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary">
                                     <option value="">Vyberte...</option>
                                     {availableUsers.filter(u => u.role === 'PRD' || u.role === 'ID').map(u => <option key={u.id} value={u.id}>{u.name}</option>)}
                                 </select>
                             </div>
                         </div>
 
-                        <div className="space-y-3">
-                            <label className="text-[10px] uppercase tracking-widest text-white/20 font-bold ml-1">Projektové Fáze (až 5)</label>
+                        <div className="space-y-2">
+                            <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold ml-0.5">Projektové Fáze (až 5)</label>
                             <div className="grid gap-2">
                                 {formData.phases.map((p, i) => (
-                                    <div key={i} className="flex items-center gap-3">
-                                        <span className="text-[10px] font-bold text-white/10 w-4">{i + 1}.</span>
+                                    <div key={i} className="flex items-center gap-2">
+                                        <span className="text-[10px] font-bold text-muted-foreground w-3">{i + 1}.</span>
                                         <input
                                             value={p}
                                             onChange={e => handlePhaseChange(i, 'name', e.target.value)}
                                             placeholder={i === 0 ? "Např. Analýza (povinné)" : "Nepovinné..."}
-                                            className="flex-1 bg-white/5 border border-white/10 rounded-xl py-2 px-4 text-sm outline-none focus:ring-2 focus:ring-blue-500/20"
+                                            className="flex-1 bg-white border border-border rounded-sm py-1.5 px-3 text-xs outline-none focus:ring-1 focus:ring-primary/30"
                                         />
                                         <input
                                             type="date"
                                             value={formData.phaseDates[i]}
                                             onChange={e => handlePhaseChange(i, 'date', e.target.value)}
-                                            className="w-32 bg-white/5 border border-white/10 rounded-xl py-2 px-3 text-[10px] outline-none focus:ring-2 focus:ring-blue-500/20 text-white/60"
+                                            className="w-32 bg-white border border-border rounded-sm py-1.5 px-2 text-[10px] outline-none text-muted-foreground"
                                         />
                                     </div>
                                 ))}
@@ -151,7 +151,7 @@ export function CreateProjectModal({
                     </div>
 
                     <div className="pt-2">
-                        <button disabled={isSubmitting} type="submit" className="w-full py-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2 transition-all disabled:opacity-50">
+                        <button disabled={isSubmitting} type="submit" className="w-full py-2 rounded-sm bg-primary hover:bg-primary/90 text-white font-semibold text-xs shadow-sm flex items-center justify-center gap-2 transition-all disabled:opacity-50">
                             {isSubmitting ? 'Vytvářím...' : <>Vytvořit Projekt</>}
                         </button>
                     </div>
@@ -185,23 +185,28 @@ export function AddPhaseModal({ isOpen, onClose, projectId }: { isOpen: boolean,
     }
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-            <div className="bg-[#1a1c23] border border-white/10 rounded-2xl w-full max-w-sm shadow-2xl p-6 space-y-6">
-                <h3 className="text-xl font-bold flex items-center gap-3"><Calendar className="text-amber-500" size={20} /> Přidat Fázi (Sloupec)</h3>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="grid grid-cols-1 gap-4">
-                        <div className="space-y-2">
-                            <label className="text-[10px] uppercase tracking-widest text-white/20 font-bold ml-1">Název Fáze / Milníku</label>
-                            <input required autoFocus value={name} onChange={e => setName(e.target.value)} placeholder="Např. Review, Bonus..." className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-sm outline-none focus:ring-2 focus:ring-amber-500/50" />
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 animate-in fade-in duration-200">
+            <div className="bg-white border border-border rounded-sm w-full max-w-sm shadow-2xl overflow-hidden">
+                <div className="flex justify-between items-center p-4 border-b border-border bg-accent/30 shrink-0">
+                    <h3 className="text-sm font-bold flex items-center gap-2 text-foreground"><Calendar className="text-amber-600" size={16} /> Přidat Fázi (Sloupec)</h3>
+                    <button onClick={onClose} className="p-1 text-muted-foreground hover:text-foreground transition-colors">
+                        <X size={18} />
+                    </button>
+                </div>
+                <form onSubmit={handleSubmit} className="p-5 space-y-4">
+                    <div className="space-y-4">
+                        <div className="space-y-1">
+                            <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold ml-0.5">Název Fáze / Milníku</label>
+                            <input required autoFocus value={name} onChange={e => setName(e.target.value)} placeholder="Např. Review, Bonus..." className="w-full bg-white border border-border rounded-sm py-2 px-3 text-xs outline-none focus:ring-1 focus:ring-amber-500/50" />
                         </div>
-                        <div className="space-y-2">
-                            <label className="text-[10px] uppercase tracking-widest text-white/20 font-bold ml-1">Termín (Milník)</label>
-                            <input type="date" value={dueDate} onChange={e => setDueDate(e.target.value)} className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-sm outline-none focus:ring-2 focus:ring-amber-500/50 text-white/60" />
+                        <div className="space-y-1">
+                            <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold ml-0.5">Termín (Milník)</label>
+                            <input type="date" value={dueDate} onChange={e => setDueDate(e.target.value)} className="w-full bg-white border border-border rounded-sm py-2 px-3 text-xs outline-none focus:ring-1 focus:ring-amber-500/50 text-muted-foreground" />
                         </div>
                     </div>
-                    <div className="flex gap-3 pt-2">
-                        <button type="button" onClick={onClose} className="flex-1 py-3 text-sm font-bold text-white/40 hover:bg-white/5 rounded-xl border border-white/10">Zrušit</button>
-                        <button disabled={isSubmitting} type="submit" className="flex-1 py-3 bg-amber-600 hover:bg-amber-500 text-white text-sm font-bold rounded-xl shadow-lg shadow-amber-600/20">Přidat</button>
+                    <div className="flex gap-2 pt-2">
+                        <button type="button" onClick={onClose} className="flex-1 py-1.5 rounded-sm border border-border text-foreground font-semibold text-xs hover:bg-accent transition-all">Zrušit</button>
+                        <button disabled={isSubmitting} type="submit" className="flex-1 py-1.5 bg-amber-600 hover:bg-amber-700 text-white font-semibold text-xs shadow-sm transition-all">Přidat</button>
                     </div>
                 </form>
             </div>
@@ -241,24 +246,31 @@ export function AddMemberModal({
     }
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-            <div className="bg-[#1a1c23] border border-white/10 rounded-2xl w-full max-w-sm shadow-2xl p-6 space-y-6">
-                <h3 className="text-xl font-bold flex items-center gap-3"><Users className="text-blue-500" size={20} /> Přidat Pracovníka</h3>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="space-y-2">
-                        <label className="text-[10px] uppercase tracking-widest text-white/20 font-bold ml-1">Zaměstnanec</label>
-                        <select required value={formData.userId} onChange={e => setFormData({ ...formData, userId: e.target.value })} className="w-full bg-[#1a1c23] border border-white/10 rounded-xl py-3 px-4 text-sm outline-none">
-                            <option value="">Vyberte...</option>
-                            {availableUsers.map(u => <option key={u.id} value={u.id}>{u.name} ({u.role})</option>)}
-                        </select>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 animate-in fade-in duration-200">
+            <div className="bg-white border border-border rounded-sm w-full max-w-sm shadow-2xl overflow-hidden">
+                <div className="flex justify-between items-center p-4 border-b border-border bg-accent/30 shrink-0">
+                    <h3 className="text-sm font-bold flex items-center gap-2 text-foreground"><Users className="text-primary" size={16} /> Přidat Pracovníka</h3>
+                    <button onClick={onClose} className="p-1 text-muted-foreground hover:text-foreground transition-colors">
+                        <X size={18} />
+                    </button>
+                </div>
+                <form onSubmit={handleSubmit} className="p-5 space-y-4">
+                    <div className="space-y-4">
+                        <div className="space-y-1">
+                            <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold ml-0.5">Zaměstnanec</label>
+                            <select required value={formData.userId} onChange={e => setFormData({ ...formData, userId: e.target.value })} className="w-full bg-white border border-border rounded-sm py-2 px-3 text-xs outline-none focus:ring-1 focus:ring-primary/30">
+                                <option value="">Vyberte...</option>
+                                {availableUsers.map(u => <option key={u.id} value={u.id}>{u.name} ({u.role})</option>)}
+                            </select>
+                        </div>
+                        <div className="space-y-1">
+                            <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold ml-0.5">Role v Projektu</label>
+                            <input required value={formData.role} onChange={e => setFormData({ ...formData, role: e.target.value })} placeholder="Např. Konzultant" className="w-full bg-white border border-border rounded-sm py-2 px-3 text-xs outline-none focus:ring-1 focus:ring-primary/30" />
+                        </div>
                     </div>
-                    <div className="space-y-2">
-                        <label className="text-[10px] uppercase tracking-widest text-white/20 font-bold ml-1">Role v Projektu</label>
-                        <input required value={formData.role} onChange={e => setFormData({ ...formData, role: e.target.value })} placeholder="Např. Konzultant" className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-sm outline-none" />
-                    </div>
-                    <div className="flex gap-3 pt-2">
-                        <button type="button" onClick={onClose} className="flex-1 py-3 text-sm font-bold text-white/40 hover:bg-white/5 rounded-xl border border-white/10">Zrušit</button>
-                        <button disabled={isSubmitting} type="submit" className="flex-1 py-3 bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold rounded-xl shadow-lg shadow-blue-600/20">Přidat</button>
+                    <div className="flex gap-2 pt-2">
+                        <button type="button" onClick={onClose} className="flex-1 py-1.5 rounded-sm border border-border text-foreground font-semibold text-xs hover:bg-accent transition-all">Zrušit</button>
+                        <button disabled={isSubmitting} type="submit" className="flex-1 py-1.5 bg-primary hover:bg-primary/90 text-white font-semibold text-xs shadow-sm transition-all">Přidat</button>
                     </div>
                 </form>
             </div>
@@ -297,42 +309,49 @@ export function CreateUserModal({
     }
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-            <div className="bg-[#1a1c23] border border-white/10 rounded-2xl w-full max-w-sm shadow-2xl p-6 space-y-6">
-                <h3 className="text-xl font-bold flex items-center gap-3"><Users className="text-blue-500" size={20} /> Nový Zaměstnanec</h3>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="space-y-2">
-                        <label className="text-[10px] uppercase tracking-widest text-white/20 font-bold ml-1">Jméno</label>
-                        <input required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} placeholder="Jméno a Příjmení" className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-sm outline-none focus:ring-2 focus:ring-blue-500/20" />
-                    </div>
-                    <div className="space-y-2">
-                        <label className="text-[10px] uppercase tracking-widest text-white/20 font-bold ml-1">E-mail</label>
-                        <input required type="email" value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} placeholder="email@konicaminolta.cz" className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-sm outline-none focus:ring-2 focus:ring-blue-500/20" />
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                            <label className="text-[10px] uppercase tracking-widest text-white/20 font-bold ml-1">Role v Systému</label>
-                            <select value={formData.role} onChange={e => setFormData({ ...formData, role: e.target.value })} className="w-full bg-[#1a1c23] border border-white/10 rounded-xl py-3 px-4 text-sm outline-none">
-                                <option value="ID">ID (Ředitel)</option>
-                                <option value="PM">PM (Project Manager)</option>
-                                <option value="PRD">PRD (Product Director)</option>
-                                <option value="MLZ">MLZ (Manager)</option>
-                                <option value="EMP">EMP (Zaměstnanec)</option>
-                            </select>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 animate-in fade-in duration-200">
+            <div className="bg-white border border-border rounded-sm w-full max-w-sm shadow-2xl overflow-hidden">
+                <div className="flex justify-between items-center p-4 border-b border-border bg-accent/30 shrink-0">
+                    <h3 className="text-sm font-bold flex items-center gap-2 text-foreground"><Users className="text-primary" size={16} /> Nový Zaměstnanec</h3>
+                    <button onClick={onClose} className="p-1 text-muted-foreground hover:text-foreground transition-colors">
+                        <X size={18} />
+                    </button>
+                </div>
+                <form onSubmit={handleSubmit} className="p-5 space-y-4">
+                    <div className="space-y-4">
+                        <div className="space-y-1">
+                            <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold ml-0.5">Jméno</label>
+                            <input required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} placeholder="Jméno a Příjmení" className="w-full bg-white border border-border rounded-sm py-2 px-3 text-xs outline-none focus:ring-1 focus:ring-primary/30" />
                         </div>
-                        <div className="space-y-2">
-                            <label className="text-[10px] uppercase tracking-widest text-white/20 font-bold ml-1">Nadřízený (MLZ)</label>
-                            <select value={formData.managerId} onChange={e => setFormData({ ...formData, managerId: e.target.value })} className="w-full bg-[#1a1c23] border border-white/10 rounded-xl py-3 px-4 text-sm outline-none">
-                                <option value="">Žádný</option>
-                                {availableManagers.map(u => (
-                                    <option key={u.id} value={u.id}>{u.name} ({u.role})</option>
-                                ))}
-                            </select>
+                        <div className="space-y-1">
+                            <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold ml-0.5">E-mail</label>
+                            <input required type="email" value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} placeholder="email@konicaminolta.cz" className="w-full bg-white border border-border rounded-sm py-2 px-3 text-xs outline-none focus:ring-1 focus:ring-primary/30" />
+                        </div>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-1">
+                                <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold ml-0.5">Role v Systému</label>
+                                <select value={formData.role} onChange={e => setFormData({ ...formData, role: e.target.value })} className="w-full bg-white border border-border rounded-sm py-2 px-3 text-xs outline-none">
+                                    <option value="ID">ID (Ředitel)</option>
+                                    <option value="PM">PM (Project Manager)</option>
+                                    <option value="PRD">PRD (Product Director)</option>
+                                    <option value="MLZ">MLZ (Manager)</option>
+                                    <option value="EMP">EMP (Zaměstnanec)</option>
+                                </select>
+                            </div>
+                            <div className="space-y-1">
+                                <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold ml-0.5">Nadřízený (MLZ)</label>
+                                <select value={formData.managerId} onChange={e => setFormData({ ...formData, managerId: e.target.value })} className="w-full bg-white border border-border rounded-sm py-2 px-3 text-xs outline-none">
+                                    <option value="">Žádný</option>
+                                    {availableManagers.map(u => (
+                                        <option key={u.id} value={u.id}>{u.name} ({u.role})</option>
+                                    ))}
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <div className="flex gap-3 pt-2">
-                        <button type="button" onClick={onClose} className="flex-1 py-3 text-sm font-bold text-white/40 hover:bg-white/5 rounded-xl border border-white/10">Zrušit</button>
-                        <button disabled={isSubmitting} type="submit" className="flex-1 py-3 bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold rounded-xl shadow-lg shadow-blue-600/20">{isSubmitting ? 'Vytvářím...' : 'Vytvořit'}</button>
+                    <div className="flex gap-2 pt-2">
+                        <button type="button" onClick={onClose} className="flex-1 py-1.5 rounded-sm border border-border text-foreground font-semibold text-xs hover:bg-accent transition-all">Zrušit</button>
+                        <button disabled={isSubmitting} type="submit" className="flex-1 py-1.5 bg-primary hover:bg-primary/90 text-white font-semibold text-xs shadow-sm transition-all">{isSubmitting ? 'Vytvářím...' : 'Vytvořit'}</button>
                     </div>
                 </form>
             </div>
@@ -383,47 +402,49 @@ export function EditUserModal({
     }
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-            <div className="bg-[#1a1c23] border border-white/10 rounded-2xl w-full max-w-sm shadow-2xl p-6 space-y-6">
-                <div className="flex justify-between items-center">
-                    <h3 className="text-xl font-bold flex items-center gap-3"><Users className="text-blue-500" size={20} /> Upravit Zaměstnance</h3>
-                    <button onClick={onClose} className="text-white/20 hover:text-white transition-colors">
-                        <Plus className="rotate-45" size={20} />
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 animate-in fade-in duration-200">
+            <div className="bg-white border border-border rounded-sm w-full max-w-sm shadow-2xl overflow-hidden">
+                <div className="flex justify-between items-center p-4 border-b border-border bg-accent/30 shrink-0">
+                    <h3 className="text-sm font-bold flex items-center gap-2 text-foreground"><Users className="text-primary" size={16} /> Upravit Zaměstnance</h3>
+                    <button onClick={onClose} className="p-1 text-muted-foreground hover:text-foreground transition-colors">
+                        <X size={18} />
                     </button>
                 </div>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="space-y-2">
-                        <label className="text-[10px] uppercase tracking-widest text-white/20 font-bold ml-1">Jméno</label>
-                        <input required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} placeholder="Jméno a Příjmení" className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-sm outline-none focus:ring-2 focus:ring-blue-500/20" />
-                    </div>
-                    <div className="space-y-2">
-                        <label className="text-[10px] uppercase tracking-widest text-white/20 font-bold ml-1">E-mail</label>
-                        <input required type="email" value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} placeholder="email@konicaminolta.cz" className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-sm outline-none focus:ring-2 focus:ring-blue-500/20 font-mono" />
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                            <label className="text-[10px] uppercase tracking-widest text-white/20 font-bold ml-1">Role v Systému</label>
-                            <select value={formData.role} onChange={e => setFormData({ ...formData, role: e.target.value })} className="w-full bg-[#1a1c23] border border-white/10 rounded-xl py-3 px-4 text-sm outline-none">
-                                <option value="ID">ID (Ředitel)</option>
-                                <option value="PM">PM (Project Manager)</option>
-                                <option value="PRD">PRD (Product Director)</option>
-                                <option value="MLZ">MLZ (Manager)</option>
-                                <option value="EMP">EMP (Zaměstnanec)</option>
-                            </select>
+                <form onSubmit={handleSubmit} className="p-5 space-y-4">
+                    <div className="space-y-4">
+                        <div className="space-y-1">
+                            <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold ml-0.5">Jméno</label>
+                            <input required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} placeholder="Jméno a Příjmení" className="w-full bg-white border border-border rounded-sm py-2 px-3 text-xs outline-none focus:ring-1 focus:ring-primary/30" />
                         </div>
-                        <div className="space-y-2">
-                            <label className="text-[10px] uppercase tracking-widest text-white/20 font-bold ml-1">Nadřízený</label>
-                            <select value={formData.managerId} onChange={e => setFormData({ ...formData, managerId: e.target.value })} className="w-full bg-[#1a1c23] border border-white/10 rounded-xl py-3 px-4 text-sm outline-none">
-                                <option value="">Žádný</option>
-                                {availableManagers.filter(u => u.id !== user.id).map(u => (
-                                    <option key={u.id} value={u.id}>{u.name} ({u.role})</option>
-                                ))}
-                            </select>
+                        <div className="space-y-1">
+                            <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold ml-0.5">E-mail</label>
+                            <input required type="email" value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} placeholder="email@konicaminolta.cz" className="w-full bg-white border border-border rounded-sm py-2 px-3 text-xs outline-none focus:ring-1 focus:ring-primary/30" />
+                        </div>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-1">
+                                <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold ml-0.5">Role v Systému</label>
+                                <select value={formData.role} onChange={e => setFormData({ ...formData, role: e.target.value })} className="w-full bg-white border border-border rounded-sm py-2 px-3 text-xs outline-none">
+                                    <option value="ID">ID (Ředitel)</option>
+                                    <option value="PM">PM (Project Manager)</option>
+                                    <option value="PRD">PRD (Product Director)</option>
+                                    <option value="MLZ">MLZ (Manager)</option>
+                                    <option value="EMP">EMP (Zaměstnanec)</option>
+                                </select>
+                            </div>
+                            <div className="space-y-1">
+                                <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold ml-0.5">Nadřízený</label>
+                                <select value={formData.managerId} onChange={e => setFormData({ ...formData, managerId: e.target.value })} className="w-full bg-white border border-border rounded-sm py-2 px-3 text-xs outline-none">
+                                    <option value="">Žádný</option>
+                                    {availableManagers.filter(u => u.id !== user.id).map(u => (
+                                        <option key={u.id} value={u.id}>{u.name} ({u.role})</option>
+                                    ))}
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <div className="flex gap-3 pt-2">
-                        <button type="button" onClick={onClose} className="flex-1 py-3 text-sm font-bold text-white/40 hover:bg-white/5 rounded-xl border border-white/10">Zrušit</button>
-                        <button disabled={isSubmitting} type="submit" className="flex-1 py-3 bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold rounded-xl shadow-lg shadow-blue-600/20">{isSubmitting ? 'Ukládám...' : 'Uložit Změny'}</button>
+                    <div className="flex gap-2 pt-2">
+                        <button type="button" onClick={onClose} className="flex-1 py-1.5 rounded-sm border border-border text-foreground font-semibold text-xs hover:bg-accent transition-all">Zrušit</button>
+                        <button disabled={isSubmitting} type="submit" className="flex-1 py-1.5 bg-primary hover:bg-primary/90 text-white font-semibold text-xs shadow-sm transition-all">{isSubmitting ? 'Ukládám...' : 'Uložit Změny'}</button>
                     </div>
                 </form>
             </div>

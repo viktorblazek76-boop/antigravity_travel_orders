@@ -21,16 +21,16 @@ export function UserClientSection({ availableUsers }: { availableUsers: any[] })
 
     return (
         <>
-            <div className="bg-blue-600/10 border border-blue-500/20 rounded-2xl p-8 flex justify-between items-center">
+            <div className="bg-white border-l-4 border-l-primary border-y border-r border-border rounded-sm p-6 flex justify-between items-center shadow-sm">
                 <div>
-                    <h3 className="text-xl font-bold mb-1">Nový Zaměstnanec</h3>
-                    <p className="text-white/40 text-sm">Založte nového pracovníka do systému projektových odměn.</p>
+                    <h3 className="text-sm font-bold mb-1 text-foreground">Nový Zaměstnanec</h3>
+                    <p className="text-muted-foreground text-[11px] font-medium">Založte nového pracovníka do systému projektových odměn.</p>
                 </div>
                 <button
                     onClick={() => setIsCreateOpen(true)}
-                    className="flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-xl font-bold transition-all shadow-lg shadow-blue-600/20"
+                    className="flex items-center gap-2 px-5 py-2 bg-primary hover:bg-primary/90 text-white rounded-sm text-xs font-semibold shadow-sm transition-all"
                 >
-                    <UserPlus size={18} />
+                    <UserPlus size={16} />
                     Přidat Pracovníka
                 </button>
             </div>

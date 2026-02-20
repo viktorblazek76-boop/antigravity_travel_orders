@@ -51,81 +51,81 @@ export function RewardForm({
     }
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-            <div className="bg-[#1a1c23] border border-white/10 rounded-2xl w-full max-w-md shadow-2xl shadow-black/50 overflow-hidden">
-                <div className="flex justify-between items-center p-6 border-b border-white/5">
-                    <h3 className="text-xl font-bold text-white">Zadat odměnu</h3>
-                    <button onClick={onClose} className="p-2 text-white/40 hover:text-white transition-colors">
-                        <X size={20} />
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 animate-in fade-in duration-200">
+            <div className="bg-white border border-border rounded-sm w-full max-w-sm shadow-2xl overflow-hidden">
+                <div className="flex justify-between items-center p-4 border-b border-border bg-accent/30">
+                    <h3 className="text-sm font-bold text-foreground">Zadat odměnu</h3>
+                    <button onClick={onClose} className="p-1 text-muted-foreground hover:text-foreground transition-colors">
+                        <X size={18} />
                     </button>
                 </div>
 
-                <form onSubmit={handleSubmit} className="p-6 space-y-6">
-                    <div className="space-y-4">
-                        <div className="flex items-center gap-3 p-3 bg-white/2 rounded-xl border border-white/5">
-                            <div className="w-10 h-10 bg-blue-600/20 rounded-lg flex items-center justify-center text-blue-400">
-                                <User size={20} />
+                <form onSubmit={handleSubmit} className="p-5 space-y-4">
+                    <div className="space-y-3">
+                        <div className="flex items-center gap-3 p-2 bg-accent/20 rounded-sm border border-border">
+                            <div className="w-8 h-8 bg-primary/10 rounded-sm flex items-center justify-center text-primary">
+                                <User size={16} />
                             </div>
                             <div>
-                                <p className="text-[10px] uppercase tracking-widest text-white/20 font-bold">Pracovník</p>
-                                <p className="text-sm font-semibold">{userName}</p>
+                                <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">Pracovník</p>
+                                <p className="text-xs font-semibold text-foreground">{userName}</p>
                             </div>
                         </div>
 
-                        <div className="flex items-center gap-3 p-3 bg-white/2 rounded-xl border border-white/5">
-                            <div className="w-10 h-10 bg-amber-500/20 rounded-lg flex items-center justify-center text-amber-500">
-                                <Calendar size={20} />
+                        <div className="flex items-center gap-3 p-2 bg-accent/20 rounded-sm border border-border">
+                            <div className="w-8 h-8 bg-amber-50 rounded-sm flex items-center justify-center text-amber-600 border border-amber-100">
+                                <Calendar size={16} />
                             </div>
                             <div>
-                                <p className="text-[10px] uppercase tracking-widest text-white/20 font-bold">Fáze</p>
-                                <p className="text-sm font-semibold">{phaseName}</p>
+                                <p className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">Fáze</p>
+                                <p className="text-xs font-semibold text-foreground">{phaseName}</p>
                             </div>
                         </div>
                     </div>
 
-                    <div className="space-y-2">
-                        <label className="text-[10px] uppercase tracking-widest text-white/20 font-bold ml-1">Částka (Kč)</label>
+                    <div className="space-y-1">
+                        <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold ml-0.5">Částka (Kč)</label>
                         <div className="relative">
-                            <DollarSign className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20" size={18} />
+                            <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={16} />
                             <input
                                 type="number"
                                 value={amount}
                                 onChange={(e) => setAmount(e.target.value)}
                                 placeholder="0"
                                 autoFocus
-                                className="w-full bg-white/5 border border-white/10 rounded-xl py-4 pl-12 pr-4 text-xl font-bold text-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all"
+                                className="w-full bg-white border border-border rounded-sm py-2 pl-9 pr-3 text-lg font-bold text-primary focus:outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary transition-all"
                             />
                         </div>
                     </div>
 
-                    <div className="space-y-2">
-                        <label className="text-[10px] uppercase tracking-widest text-white/20 font-bold ml-1">Role v projektu</label>
+                    <div className="space-y-1">
+                        <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold ml-0.5">Role v projektu</label>
                         <input
                             type="text"
                             value={role}
                             onChange={(e) => setRole(e.target.value)}
                             placeholder="Např. Senior Konzultant"
-                            className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all placeholder:text-white/10"
+                            className="w-full bg-white border border-border rounded-sm py-2 px-3 text-xs focus:outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary transition-all placeholder:text-muted-foreground/40"
                         />
                     </div>
 
-                    <div className="pt-4 flex gap-3">
+                    <div className="pt-2 flex gap-2">
                         <button
                             type="button"
                             onClick={onClose}
-                            className="flex-1 py-3.5 rounded-xl border border-white/10 text-white/60 font-bold text-sm hover:bg-white/5 transition-all"
+                            className="flex-1 py-1.5 rounded-sm border border-border text-foreground font-semibold text-xs hover:bg-accent transition-all"
                         >
                             Zrušit
                         </button>
                         <button
                             type="submit"
                             disabled={isSubmitting}
-                            className="flex-1 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2 transition-all disabled:opacity-50"
+                            className="flex-1 py-1.5 rounded-sm bg-primary hover:bg-primary/90 text-white font-semibold text-xs shadow-sm flex items-center justify-center gap-2 transition-all disabled:opacity-50"
                         >
                             {isSubmitting ? (
-                                <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
+                                <div className="w-3 h-3 border-2 border-white/20 border-t-white rounded-full animate-spin"></div>
                             ) : (
-                                <Save size={18} />
+                                <Save size={16} />
                             )}
                             Uložit návrh
                         </button>

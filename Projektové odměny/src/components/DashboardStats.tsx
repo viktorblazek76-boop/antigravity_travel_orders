@@ -18,30 +18,30 @@ export function DashboardStats({
     currentRole: string
 }) {
     return (
-        <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div className="space-y-8 animate-in fade-in slide-in-from-bottom-2 duration-300">
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <StatCard
                     label="Čeká na schválení"
                     value={`${stats.totalPending.toLocaleString('cs-CZ')} Kč`}
-                    icon={<Clock className="text-amber-500" />}
+                    icon={<Clock size={20} className="text-amber-600" />}
                     trend="PROPOSED"
                 />
                 <StatCard
                     label="Schváleno k výplatě"
                     value={`${stats.totalApproved.toLocaleString('cs-CZ')} Kč`}
-                    icon={<CheckCircle2 className="text-emerald-500" />}
+                    icon={<CheckCircle2 size={20} className="text-emerald-600" />}
                     trend="APPROVED"
                 />
                 <StatCard
                     label="Aktivní Projekty"
                     value={stats.projectCount.toString()}
-                    icon={<Briefcase className="text-blue-500" />}
+                    icon={<Briefcase size={20} className="text-primary" />}
                 />
                 <StatCard
                     label="Akce k vyřízení"
                     value={stats.pendingActionsCount.toString()}
-                    icon={<AlertCircle className="text-rose-500" />}
+                    icon={<AlertCircle size={20} className="text-rose-600" />}
                     highlight={stats.pendingActionsCount > 0}
                 />
             </div>
@@ -49,35 +49,35 @@ export function DashboardStats({
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* Pending Actions / Tasks */}
                 <div className="lg:col-span-2 space-y-4">
-                    <div className="flex justify-between items-center">
-                        <h3 className="text-lg font-bold">Úkoly k vyřízení</h3>
-                        <Link href={`/projects?role=${currentRole}`} className="text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1">
+                    <div className="flex justify-between items-center px-1">
+                        <h3 className="text-sm font-bold text-foreground">Úkoly k vyřízení</h3>
+                        <Link href={`/projects?role=${currentRole}`} className="text-[11px] font-semibold text-primary hover:underline flex items-center gap-1">
                             Přejít na projekty <ArrowRight size={12} />
                         </Link>
                     </div>
 
-                    <div className="space-y-3">
+                    <div className="space-y-2">
                         {stats.recentActions.length > 0 ? (
                             stats.recentActions.map((action, i) => (
-                                <div key={i} className="bg-white/5 border border-white/10 rounded-2xl p-4 flex justify-between items-center hover:bg-white/10 transition-all group">
-                                    <div className="flex items-center gap-4">
-                                        <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${action.status === 'PROPOSED' ? 'bg-amber-500/10 text-amber-500' : 'bg-blue-500/10 text-blue-500'
+                                <div key={i} className="bg-white border border-border rounded-sm p-3 flex justify-between items-center hover:bg-accent/40 transition-all group shadow-sm">
+                                    <div className="flex items-center gap-3">
+                                        <div className={`w-9 h-9 rounded-sm flex items-center justify-center border ${action.status === 'PROPOSED' ? 'bg-amber-50 text-amber-600 border-amber-100' : 'bg-primary/5 text-primary border-primary/10'
                                             }`}>
-                                            {action.isTeamReward ? <Shield size={18} className="text-blue-400" /> : action.status === 'PROPOSED' ? <Clock size={18} /> : <DollarSign size={18} />}
+                                            {action.isTeamReward ? <Shield size={16} className="text-primary" /> : action.status === 'PROPOSED' ? <Clock size={16} /> : <DollarSign size={16} />}
                                         </div>
                                         <div>
-                                            <div className="text-sm font-bold">{action.user?.name || (action.isTeamReward ? 'Týmový Budget' : 'Neznámý')}</div>
-                                            <div className="text-[10px] text-white/40 uppercase tracking-widest">{action.phase?.project?.name} • {action.phase?.name}</div>
+                                            <div className="text-xs font-bold text-foreground">{action.user?.name || (action.isTeamReward ? 'Týmový Budget' : 'Neznámý')}</div>
+                                            <div className="text-[10px] text-muted-foreground uppercase tracking-tight">{action.phase?.project?.name} • {action.phase?.name}</div>
                                         </div>
                                     </div>
                                     <div className="text-right">
-                                        <div className="text-sm font-mono font-bold text-blue-400">{action.amount.toLocaleString('cs-CZ')} Kč</div>
-                                        <div className="text-[10px] text-white/20 italic">{action.status === 'PROPOSED' ? 'Čeká na schválení' : 'Ke schválení výplaty'}</div>
+                                        <div className="text-xs font-bold text-primary">{action.amount.toLocaleString('cs-CZ')} Kč</div>
+                                        <div className="text-[10px] text-muted-foreground italic font-medium">{action.status === 'PROPOSED' ? 'Čeká na schválení' : 'Ke schválení výplaty'}</div>
                                     </div>
                                 </div>
                             ))
                         ) : (
-                            <div className="bg-white/2 border border-dashed border-white/5 rounded-2xl p-12 text-center text-white/20 italic text-sm">
+                            <div className="bg-accent/20 border border-dashed border-border rounded-sm p-12 text-center text-muted-foreground/30 italic text-xs">
                                 Vše hotovo! Žádné úkoly k vyřízení.
                             </div>
                         )}
@@ -85,17 +85,19 @@ export function DashboardStats({
                 </div>
 
                 {/* Info Box */}
-                <div className="bg-gradient-to-br from-blue-600/20 to-purple-600/20 border border-white/10 rounded-3xl p-8 flex flex-col justify-between">
+                <div className="bg-white border border-border rounded-sm p-6 shadow-sm flex flex-col justify-between">
                     <div>
-                        <Shield className="text-blue-400 mb-4" size={32} />
-                        <h3 className="text-xl font-bold mb-2">Role: {currentRole}</h3>
-                        <p className="text-white/60 text-sm leading-relaxed">
-                            V tomto pohledu vidíte pouze operativní data. Pro detailní správu fází a celkový přehled projektů použijte sekci <strong>Projekty</strong>.
+                        <div className="w-10 h-10 bg-primary/10 rounded-sm flex items-center justify-center text-primary mb-4">
+                            <Shield size={24} />
+                        </div>
+                        <h3 className="text-sm font-bold text-foreground mb-2">Role: {currentRole}</h3>
+                        <p className="text-muted-foreground text-[11px] leading-relaxed">
+                            V tomto pohledu vidíte pouze operativní data. Pro detailní správu fází a celkový přehled projektů použijte sekci <strong>Projekty</strong> v postranním panelu.
                         </p>
                     </div>
                     <Link
                         href={`/users?role=${currentRole}`}
-                        className="mt-6 py-3 px-4 bg-white/10 hover:bg-white/20 rounded-xl text-center text-xs font-bold transition-all"
+                        className="mt-6 py-1.5 px-4 bg-primary hover:bg-primary/90 text-white rounded-sm text-center text-[11px] font-semibold shadow-sm transition-all"
                     >
                         Správa Zaměstnanců
                     </Link>
@@ -107,20 +109,20 @@ export function DashboardStats({
 
 function StatCard({ label, value, icon, trend, highlight }: { label: string, value: string, icon: React.ReactNode, trend?: string, highlight?: boolean }) {
     return (
-        <div className={`bg-white/5 border rounded-2xl p-6 transition-all hover:scale-[1.02] ${highlight ? 'border-rose-500/30' : 'border-white/10'}`}>
-            <div className="flex justify-between items-start mb-4">
-                <div className="p-3 bg-white/5 rounded-xl">
+        <div className={`bg-white border rounded-sm p-4 transition-all shadow-sm group ${highlight ? 'border-rose-400' : 'border-border'}`}>
+            <div className="flex justify-between items-start mb-2">
+                <div className="p-2 bg-accent/50 rounded-sm">
                     {icon}
                 </div>
                 {trend && (
-                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${trend === 'APPROVED' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-amber-500/10 text-amber-400'
+                    <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-sm border ${trend === 'APPROVED' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-amber-50 text-amber-600 border-amber-100'
                         }`}>
-                        {trend}
+                        {trend === 'APPROVED' ? 'SCHVÁLENO' : 'NÁVRH'}
                     </span>
                 )}
             </div>
-            <div className="text-[10px] uppercase tracking-widest text-white/20 font-bold mb-1">{label}</div>
-            <div className="text-2xl font-bold tracking-tight">{value}</div>
+            <div className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold mb-0.5">{label}</div>
+            <div className={`text-xl font-bold tracking-tight ${highlight ? 'text-rose-600' : 'text-foreground'}`}>{value}</div>
         </div>
     )
 }

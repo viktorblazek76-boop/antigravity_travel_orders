@@ -37,39 +37,39 @@ export function TeamRewardsBreakdown({
             </button>
 
             {isOpen && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-                    <div className="bg-[#1a1c23] border border-white/10 rounded-2xl w-full max-w-lg shadow-2xl shadow-black/50 overflow-hidden flex flex-col max-h-[80vh]">
-                        <div className="flex justify-between items-center p-6 border-b border-white/5 shrink-0">
-                            <div className="flex items-center gap-3">
-                                <div className="p-2 bg-blue-600 rounded-lg text-white">
-                                    <DollarSign size={18} />
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 animate-in fade-in duration-200">
+                    <div className="bg-white border border-border rounded-sm w-full max-w-md shadow-2xl overflow-hidden flex flex-col max-h-[80vh]">
+                        <div className="flex justify-between items-center p-4 border-b border-border bg-accent/30 shrink-0">
+                            <div className="flex items-center gap-2">
+                                <div className="p-1.5 bg-primary rounded-sm text-white">
+                                    <DollarSign size={16} />
                                 </div>
                                 <div>
-                                    <h3 className="text-lg font-bold text-white">Rozpis odměn</h3>
-                                    <p className="text-[10px] text-white/40 uppercase tracking-widest">{memberName}</p>
+                                    <h3 className="text-sm font-bold text-foreground">Rozpis odměn</h3>
+                                    <p className="text-[10px] text-muted-foreground uppercase tracking-wider font-bold">{memberName}</p>
                                 </div>
                             </div>
-                            <button onClick={() => setIsOpen(false)} className="p-2 text-white/40 hover:text-white transition-colors">
-                                <X size={20} />
+                            <button onClick={() => setIsOpen(false)} className="p-1 text-muted-foreground hover:text-foreground transition-colors">
+                                <X size={18} />
                             </button>
                         </div>
 
-                        <div className="p-4 overflow-y-auto custom-scrollbar">
-                            <div className="space-y-3">
+                        <div className="p-2 overflow-y-auto custom-scrollbar">
+                            <div className="space-y-1">
                                 {rewards.map((reward) => (
-                                    <div key={reward.id} className="bg-white/5 border border-white/10 rounded-xl p-4 flex justify-between items-center">
-                                        <div className="flex items-center gap-4">
-                                            <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-white/20">
-                                                <Briefcase size={14} />
+                                    <div key={reward.id} className="bg-white border-b border-border p-3 flex justify-between items-center hover:bg-accent/30 transition-all group">
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-7 h-7 rounded-sm bg-accent flex items-center justify-center text-muted-foreground">
+                                                <Briefcase size={12} />
                                             </div>
                                             <div>
-                                                <div className="text-sm font-bold text-white">{reward.project.name}</div>
-                                                <div className="text-[10px] text-white/40 uppercase tracking-widest">{reward.phase.name}</div>
+                                                <div className="text-xs font-bold text-foreground">{reward.project.name}</div>
+                                                <div className="text-[10px] text-muted-foreground uppercase tracking-tight">{reward.phase.name}</div>
                                             </div>
                                         </div>
                                         <div className="text-right">
-                                            <div className="text-sm font-mono font-bold text-blue-400">{reward.amount.toLocaleString('cs-CZ')} Kč</div>
-                                            <div className={`text-[9px] font-bold px-1.5 py-0.5 rounded uppercase tracking-tighter ${reward.status === 'APPROVED' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-amber-500/10 text-amber-400'
+                                            <div className="text-xs font-bold text-primary">{reward.amount.toLocaleString('cs-CZ')} Kč</div>
+                                            <div className={`text-[9px] font-bold px-1.5 py-0.5 rounded-sm border inline-block uppercase tracking-tighter ${reward.status === 'APPROVED' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-amber-50 text-amber-600 border-amber-100'
                                                 }`}>
                                                 {reward.status === 'APPROVED' ? 'Schváleno' : 'Navrženo'}
                                             </div>
@@ -79,9 +79,9 @@ export function TeamRewardsBreakdown({
                             </div>
                         </div>
 
-                        <div className="p-6 bg-white/2 border-t border-white/5 flex justify-between items-center">
-                            <span className="text-xs text-white/40 font-bold uppercase tracking-widest">Dosud nevyplaceno celkem</span>
-                            <span className="text-xl font-mono font-bold text-blue-400">{totalAmount.toLocaleString('cs-CZ')} Kč</span>
+                        <div className="p-4 bg-accent/20 border-t border-border flex justify-between items-center">
+                            <span className="text-[10px] text-muted-foreground font-bold uppercase tracking-widest">Dosud nevyplaceno celkem</span>
+                            <span className="text-lg font-bold text-primary">{totalAmount.toLocaleString('cs-CZ')} Kč</span>
                         </div>
                     </div>
                 </div>

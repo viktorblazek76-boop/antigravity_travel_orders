@@ -38,10 +38,10 @@ export default async function ProjectsPage({ searchParams }: { searchParams: Pro
     }
 
     return (
-        <div className="flex h-screen bg-[#0f1115] text-white font-sans overflow-hidden">
+        <div className="flex h-screen bg-sidebar text-foreground font-sans overflow-hidden">
             <Sidebar currentUser={currentUser} currentRole={currentRole as string} allUsers={allUsers} />
 
-            <main className="flex-1 flex flex-col overflow-hidden bg-gradient-to-br from-[#0f1115] to-[#12141a]">
+            <main className="flex-1 flex flex-col overflow-hidden bg-white">
                 <Header title="Správa Projektů" currentRole={currentRole as string} userName={currentUser?.name} />
 
                 <div className="flex-1 overflow-y-auto p-10 custom-scrollbar">

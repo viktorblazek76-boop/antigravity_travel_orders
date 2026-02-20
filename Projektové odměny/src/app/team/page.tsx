@@ -47,37 +47,37 @@ export default async function TeamPage({ searchParams }: { searchParams: Promise
         : allUsers.filter(u => subordinateIds.includes(u.id))
 
     return (
-        <div className="flex h-screen bg-[#0f1115] text-white font-sans overflow-hidden">
+        <div className="flex h-screen bg-sidebar text-foreground font-sans overflow-hidden">
             <Sidebar currentUser={currentUser} currentRole={currentRole as string} allUsers={allUsers} />
 
-            <main className="flex-1 flex flex-col overflow-hidden bg-gradient-to-br from-[#0f1115] to-[#12141a]">
+            <main className="flex-1 flex flex-col overflow-hidden bg-white">
                 <Header title="Můj Tým" currentRole={currentRole as string} userName={currentUser?.name} />
 
                 <div className="flex-1 overflow-y-auto p-10 custom-scrollbar">
-                    <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
-                        <table className="w-full text-left">
-                            <thead className="bg-white/2 border-b border-white/10">
-                                <tr className="text-[10px] uppercase tracking-widest text-white/40 font-bold">
-                                    <th className="px-6 py-4">Pracovník</th>
-                                    <th className="px-6 py-4">Role</th>
-                                    <th className="px-6 py-4 text-right">Dosud nevyplacené odměny</th>
+                    <div className="bg-white border border-border rounded-sm overflow-hidden shadow-sm">
+                        <table className="w-full text-left border-collapse">
+                            <thead className="bg-accent/30 border-b border-border">
+                                <tr className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold">
+                                    <th className="px-6 py-3">Pracovník</th>
+                                    <th className="px-6 py-3">Role</th>
+                                    <th className="px-6 py-3 text-right">Dosud nevyplacené odměny</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-white/5">
+                            <tbody className="divide-y divide-border">
                                 {team.map(member => {
                                     const totalRewards = member.rewards.reduce((sum, r) => sum + r.amount, 0)
                                     return (
-                                        <tr key={member.id} className="hover:bg-white/2 transition-colors">
-                                            <td className="px-6 py-4">
+                                        <tr key={member.id} className="hover:bg-accent/40 transition-colors">
+                                            <td className="px-6 py-3.5">
                                                 <div className="flex items-center gap-3">
-                                                    <div className="w-8 h-8 rounded-full bg-blue-600/20 flex items-center justify-center text-blue-400">
+                                                    <div className="w-7 h-7 rounded-sm bg-accent flex items-center justify-center text-muted-foreground">
                                                         <UserIcon size={14} />
                                                     </div>
-                                                    <span className="font-medium">{member.name}</span>
+                                                    <span className="font-semibold text-xs text-foreground">{member.name}</span>
                                                 </div>
                                             </td>
-                                            <td className="px-6 py-4 text-sm text-white/40">{member.role}</td>
-                                            <td className="px-6 py-4 text-right">
+                                            <td className="px-6 py-3.5 text-xs text-muted-foreground font-medium">{member.role}</td>
+                                            <td className="px-6 py-3.5 text-right">
                                                 <TeamRewardsBreakdown
                                                     memberName={member.name}
                                                     rewards={member.rewards as any}

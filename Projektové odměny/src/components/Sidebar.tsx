@@ -33,33 +33,33 @@ export function Sidebar({
     const currentUserId = searchParams.get('userId') || ''
 
     return (
-        <aside className="w-68 border-r border-white/10 bg-white/5 backdrop-blur-xl flex flex-col p-6 shrink-0">
-            <div className="flex items-center gap-3 mb-12 px-2">
-                <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center font-bold text-2xl shadow-lg shadow-blue-500/20">P</div>
-                <span className="text-xl font-bold tracking-tight">Odměny</span>
+        <aside className="w-64 border-r border-border bg-sidebar flex flex-col shrink-0">
+            <div className="flex items-center gap-2 h-14 px-6 border-b border-border bg-white">
+                <div className="w-6 h-6 bg-primary rounded-sm flex items-center justify-center font-bold text-xs text-white">PO</div>
+                <span className="text-sm font-semibold tracking-tight text-foreground">Projektové odměny</span>
             </div>
 
-            <nav className="flex-1 space-y-1">
-                <NavLink href="/" icon={<LayoutDashboard size={20} />} label="Dashboard" activeRole={currentRole} activeUserId={currentUserId} />
-                <NavLink href="/projects" icon={<Briefcase size={20} />} label="Projekty" activeRole={currentRole} activeUserId={currentUserId} />
-                <NavLink href="/team" icon={<Users size={20} />} label="Můj Tým" activeRole={currentRole} activeUserId={currentUserId} />
-                <NavLink href="/users" icon={<Shield size={20} />} label="Zaměstnanci" activeRole={currentRole} activeUserId={currentUserId} />
-                <NavLink href="/settings" icon={<Settings size={20} />} label="Nastavení" activeRole={currentRole} activeUserId={currentUserId} />
+            <nav className="flex-1 p-2 space-y-0.5 mt-2">
+                <NavLink href="/" icon={<LayoutDashboard size={18} />} label="Domů" activeRole={currentRole} activeUserId={currentUserId} />
+                <NavLink href="/projects" icon={<Briefcase size={18} />} label="Projekty" activeRole={currentRole} activeUserId={currentUserId} />
+                <NavLink href="/team" icon={<Users size={18} />} label="Můj Tým" activeRole={currentRole} activeUserId={currentUserId} />
+                <NavLink href="/users" icon={<Shield size={18} />} label="Zaměstnanci" activeRole={currentRole} activeUserId={currentUserId} />
+                <NavLink href="/settings" icon={<Settings size={18} />} label="Nastavení" activeRole={currentRole} activeUserId={currentUserId} />
             </nav>
 
-            <div className="mt-auto pt-6 border-t border-white/10 space-y-4">
-                <div className="bg-white/5 border border-white/10 rounded-xl p-4">
-                    <h4 className="text-[10px] uppercase tracking-widest text-white/20 font-bold mb-3 flex items-center gap-2">
+            <div className="mt-auto p-4 border-t border-border bg-sidebar-accent/30 space-y-3">
+                <div className="bg-white border border-border shadow-sm rounded-sm p-3">
+                    <h4 className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold mb-2 flex items-center gap-2">
                         <ShieldCheck size={12} /> Simulace Role
                     </h4>
-                    <div className="grid grid-cols-2 gap-2 mb-4">
+                    <div className="grid grid-cols-2 gap-1 mb-3">
                         {['ID', 'PM', 'PRD', 'MLZ'].map((r) => (
                             <Link
                                 key={r}
-                                href={`?role=${r}`} // This clears userId when switching roles for simplicity
-                                className={`text-[10px] text-center py-1.5 rounded-md border transition-all ${currentRole === r && !currentUserId
-                                    ? 'bg-blue-600 border-blue-500 text-white font-bold'
-                                    : 'bg-white/5 border-white/10 text-white/40 hover:text-white hover:bg-white/10'
+                                href={`?role=${r}`}
+                                className={`text-[10px] text-center py-1 rounded-sm border transition-all ${currentRole === r && !currentUserId
+                                    ? 'bg-primary border-primary text-white font-semibold'
+                                    : 'bg-white border-border text-foreground/70 hover:bg-accent'
                                     }`}
                             >
                                 {r}
@@ -67,7 +67,7 @@ export function Sidebar({
                         ))}
                     </div>
 
-                    <h4 className="text-[10px] uppercase tracking-widest text-white/20 font-bold mb-2 flex items-center gap-2">
+                    <h4 className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold mb-2 flex items-center gap-2">
                         <UserIcon size={12} /> Simulace Uživatele
                     </h4>
                     <select
@@ -76,7 +76,7 @@ export function Sidebar({
                             const val = e.target.value
                             window.location.search = val ? `?userId=${val}` : `?role=${currentRole}`
                         }}
-                        className="w-full bg-[#1a1c23] border border-white/10 rounded-lg py-2 px-3 text-[10px] outline-none text-white/60 focus:ring-1 focus:ring-blue-500/50"
+                        className="w-full bg-white border border-border rounded-sm py-1.5 px-2 text-[10px] outline-none text-foreground focus:ring-1 focus:ring-primary/30"
                     >
                         <option value="">Vyberte uživatele...</option>
                         {allUsers.map(u => (
@@ -85,13 +85,13 @@ export function Sidebar({
                     </select>
                 </div>
 
-                <div className="flex items-center gap-3 px-2">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-500 flex items-center justify-center border border-white/20 shadow-md">
-                        <UserIcon size={20} />
+                <div className="flex items-center gap-3 px-1 py-2">
+                    <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center border border-border">
+                        <UserIcon size={16} className="text-muted-foreground" />
                     </div>
                     <div className="flex-1 overflow-hidden">
-                        <p className="text-sm font-bold truncate">{currentUser?.name || "Neznámý uživatel"}</p>
-                        <p className="text-[10px] text-white/30 uppercase font-bold tracking-tighter">{currentRole}</p>
+                        <p className="text-xs font-semibold text-foreground truncate">{currentUser?.name || "Neznámý uživatel"}</p>
+                        <p className="text-[9px] text-muted-foreground uppercase font-bold tracking-wider">{currentRole}</p>
                     </div>
                 </div>
             </div>
@@ -115,13 +115,10 @@ function NavLink({
     const pathname = usePathname()
     const searchParams = useSearchParams()
 
-    // Normalize pathnames for comparison
     const normalizedPathname = pathname === '/' ? '/' : pathname?.replace(/\/$/, '')
     const normalizedHref = href === '/' ? '/' : href.replace(/\/$/, '')
-
     const isActive = normalizedPathname === normalizedHref
 
-    // Maintain parameters in the link
     const params = new URLSearchParams()
     if (activeUserId) {
         params.set('userId', activeUserId)
@@ -135,16 +132,16 @@ function NavLink({
     return (
         <Link
             href={finalHref}
-            className={`flex items-center gap-4 px-4 py-3.5 rounded-xl transition-all duration-300 cursor-pointer group ${isActive
-                ? 'bg-blue-600/20 text-blue-400 border border-blue-500/20 shadow-lg shadow-blue-500/5'
-                : 'text-white/40 hover:bg-white/5 hover:text-white border border-transparent'
+            className={`flex items-center gap-3 px-3 py-2 rounded-sm transition-colors cursor-pointer group relative ${isActive
+                ? 'bg-primary/10 text-primary font-semibold'
+                : 'text-foreground/80 hover:bg-accent hover:text-foreground'
                 }`}
         >
-            <div className={`${isActive ? 'text-blue-400' : 'group-hover:text-blue-400'} transition-colors`}>
+            {isActive && <div className="absolute left-0 top-1.5 bottom-1.5 w-1 bg-primary rounded-r-full"></div>}
+            <div className={`${isActive ? 'text-primary' : 'text-muted-foreground group-hover:text-foreground'}`}>
                 {icon}
             </div>
-            <span className={`font-semibold text-sm tracking-wide ${isActive ? 'text-white' : ''}`}>{label}</span>
-            {isActive && <div className="ml-auto w-1.5 h-1.5 bg-blue-400 rounded-full"></div>}
+            <span className="text-xs tracking-tight">{label}</span>
         </Link>
     )
 }
