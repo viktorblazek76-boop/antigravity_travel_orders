@@ -7,7 +7,8 @@ export function Header({ title, currentRole, userName }: { title: string, curren
     return (
         <header className="h-14 border-b border-border flex items-center justify-between px-6 bg-white z-20 shrink-0">
             <div className="flex items-center gap-4">
-                <h1 className="text-sm font-semibold text-foreground tracking-tight">{title}</h1>
+                <h1 className="text-xl font-black text-foreground tracking-tight">{title}</h1>
+                <span className="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded-sm font-bold uppercase tracking-widest">v1.1 - REDESIGN</span>
                 <div className="flex items-center gap-2 bg-accent/50 px-2 py-0.5 rounded-sm border border-border">
                     <span className="text-muted-foreground text-[9px] font-bold">
                         ROLE: {currentRole}
