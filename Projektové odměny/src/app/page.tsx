@@ -4,12 +4,6 @@ import { DashboardStats } from '@/components/DashboardStats'
 import { Sidebar } from '@/components/Sidebar'
 import { Header } from '@/components/Header'
 
-import { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: "D365 REDESIGN TEST PAGE",
-};
-
 // This would normally come from an auth session
 // For the prototype, we'll use a search param to simulate different users
 export default async function Page({ searchParams }: { searchParams: Promise<{ role?: string, userId?: string }> }) {

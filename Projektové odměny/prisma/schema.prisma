@@ -35,6 +35,7 @@ model Project {
   
   teamBudget      Float    @default(0)
   proposedBudget  Float    @default(0)
+  projectValue    Float    @default(0)
   budgetStatus    String   @default("APPROVED") // PROPOSED, APPROVED
   
   phases        Phase[]

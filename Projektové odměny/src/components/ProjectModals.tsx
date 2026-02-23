@@ -20,6 +20,7 @@ export function CreateProjectModal({
         pmId: '',
         prdId: '',
         teamBudget: '0',
+        projectValue: '0',
         phases: ['', '', '', '', ''],
         phaseDates: ['', '', '', '', '']
     })
@@ -49,6 +50,7 @@ export function CreateProjectModal({
                 pmId: '',
                 prdId: '',
                 teamBudget: '0',
+                projectValue: '0',
                 phases: ['', '', '', '', ''],
                 phaseDates: ['', '', '', '', '']
             })
@@ -98,11 +100,24 @@ export function CreateProjectModal({
                                 <input required value={formData.customer} onChange={e => setFormData({ ...formData, customer: e.target.value })} className="w-full bg-white border border-border rounded-sm py-2 px-3 text-xs outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary transition-all" placeholder="Zákazník" />
                             </div>
                             <div className="space-y-1">
-                                <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold ml-0.5">Týmový Budget (Pool)</label>
+                                <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold ml-0.5">Týmový Budget (Pool) [CZK]</label>
                                 <input
                                     type="number"
                                     value={formData.teamBudget}
                                     onChange={(e) => setFormData({ ...formData, teamBudget: e.target.value })}
+                                    className="w-full bg-white border border-border rounded-sm py-2 px-3 text-xs outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary transition-all font-mono"
+                                    placeholder="0"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="space-y-1">
+                                <label className="text-[10px] uppercase tracking-wider text-muted-foreground font-bold ml-0.5">Hodnota projektu (tis. Kč)</label>
+                                <input
+                                    type="number"
+                                    value={formData.projectValue}
+                                    onChange={(e) => setFormData({ ...formData, projectValue: e.target.value })}
                                     className="w-full bg-white border border-border rounded-sm py-2 px-3 text-xs outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary transition-all font-mono"
                                     placeholder="0"
                                 />

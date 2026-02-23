@@ -9,10 +9,11 @@ export async function createProject(data: {
     pmId: string
     prdId: string
     teamBudget?: string | number
+    projectValue?: string | number
     phases: string[]
     phaseDates?: (string | null)[]
 }) {
-    const { name, customer, pmId, prdId, phases, phaseDates, teamBudget } = data
+    const { name, customer, pmId, prdId, phases, phaseDates, teamBudget, projectValue } = data
 
     const project = await prisma.project.create({
         data: {
@@ -21,6 +22,7 @@ export async function createProject(data: {
             pmId,
             prdId,
             teamBudget: teamBudget ? parseFloat(teamBudget.toString()) : 0,
+            projectValue: projectValue ? parseFloat(projectValue.toString()) : 0,
             phases: {
                 create: phases.map((phaseName, index) => ({
                     name: phaseName,

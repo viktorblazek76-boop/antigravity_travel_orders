@@ -36,6 +36,7 @@ type Project = {
     customer: string
     teamBudget: number
     proposedBudget: number
+    projectValue: number
     budgetStatus: string
     phases: Phase[]
     rewards: Reward[]
@@ -84,7 +85,7 @@ export function ProjectGrid({ projects, currentRole, currentUserId, availableUse
     return (
         <div className="space-y-12">
             {/* Global Actions */}
-            {(currentRole === 'ID') && (
+            {(currentRole === 'ID' || currentRole === 'PM') && (
                 <div className="flex justify-end">
                     <button
                         onClick={() => setIsCreateProjectOpen(true)}
@@ -101,7 +102,12 @@ export function ProjectGrid({ projects, currentRole, currentUserId, availableUse
                     <div className="p-4 border-b border-border flex justify-between items-center bg-accent/30">
                         <div>
                             <h2 className="text-sm font-bold text-primary">{project.name}</h2>
-                            <p className="text-[11px] text-muted-foreground">{project.customer}</p>
+                            <div className="flex items-center gap-2">
+                                <p className="text-[11px] text-muted-foreground">{project.customer}</p>
+                                <span className="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded-sm font-bold border border-primary/20">
+                                    {project.projectValue.toLocaleString('cs-CZ')} tis. Kč
+                                </span>
+                            </div>
                         </div>
                         <div className="flex gap-2 items-center">
                             {(currentRole === 'ID' || (currentRole === 'PM' && project.rewards.some(r => r.userId === currentUserId))) && (
