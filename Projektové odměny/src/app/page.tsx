@@ -4,9 +4,18 @@ import { DashboardStats } from '@/components/DashboardStats'
 import { Sidebar } from '@/components/Sidebar'
 import { Header } from '@/components/Header'
 
+import { auth } from "@/auth"
+import { redirect } from "next/navigation"
+
 // This would normally come from an auth session
 // For the prototype, we'll use a search param to simulate different users
 export default async function Page({ searchParams }: { searchParams: Promise<{ role?: string, userId?: string }> }) {
+  const session = await auth()
+
+  if (!session) {
+    redirect("/api/auth/signin")
+  }
+
   const { role, userId } = await searchParams
 
   let allUsers = await prisma.user.findMany()

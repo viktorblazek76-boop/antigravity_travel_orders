@@ -17,11 +17,15 @@ export const metadata: Metadata = {
   description: "Systém pro správu projektových odměn a bonusů",
 };
 
-export default function RootLayout({
+import { auth } from "@/auth"
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth()
+
   return (
     <html lang="en">
       <body
