@@ -18,10 +18,20 @@ export default async function ProjectsPage({ searchParams }: { searchParams: Pro
 
     const allUsers = await prisma.user.findMany()
 
-    // Find simulated user based on ID or Role
-    const simulatedUser = userId
-        ? allUsers.find(u => u.id === userId)
-        : allUsers.find(u => u.role === (role || 'ID'))
+    // 1. Get user by email from Entra ID session
+    const authenticatedUser = allUsers.find(u => u.email?.toLowerCase() === session.user?.email?.toLowerCase())
+
+    // 2. Determine simulation or real user
+    let simulatedUser = null
+    if (userId) {
+        simulatedUser = allUsers.find(u => u.id === userId)
+    } else if (role) {
+        simulatedUser = allUsers.find(u => u.role === role)
+    } else if (authenticatedUser) {
+        simulatedUser = authenticatedUser
+    } else {
+        simulatedUser = allUsers.find(u => u.role === 'ID')
+    }
 
     const currentRole = simulatedUser?.role || role || 'ID'
     const simulatedUserId = simulatedUser?.id || ''
